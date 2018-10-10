@@ -9,7 +9,6 @@ var app = express();
 hbs.registerPartials(__dirname + '/views/partials');
 app.set('view engine', 'hbs');
 
-
 // use is how we regester middlewhere
 app.use((req, res, next) => {
   var now = new Date().toString();
@@ -34,17 +33,15 @@ app.get('/', (req, res) => {
   });
 });
 
-hbs.registerHelper('getCurrentYear', () => {
-  return new Date().getFullYear();
-});
-
-hbs.registerHelper('screamIt', (text) => {
-  return text.toUpperCase();
-});
-
 app.get('/about', (req, res) => {
   res.render('about.hbs', {
     pageTitle: 'About Page'    
+  });
+});
+
+app.get('/projects', (req, res) => {
+  res.render('projects.hbs', {
+    pageTitle: 'Projects!'
   });
 });
 
@@ -52,6 +49,14 @@ app.get('/bad', (req, res) => {
   res.send({
     error: 'Bad Request.'
   });
+});
+
+hbs.registerHelper('getCurrentYear', () => {
+  return new Date().getFullYear();
+});
+
+hbs.registerHelper('screamIt', (text) => {
+  return text.toUpperCase();
 });
 
 app.listen(port, () => {
